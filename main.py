@@ -11,13 +11,13 @@ def main() -> None:
     print("Display:", adb.run_adb("shell", "wm", "size"))
 
     print("\nOpen Samsung Pro Video manual focus slider.")
-    print("Set focus to 0.50 and verify controls in scrcpy.")
+    print("Set focus to 1.00.")
 
-    if input("Type TAP to move focus one step right: ").strip() == "TAP":
-        focus.step_right()
-        print("Focus tap sent.")
+    if input("Type HOME to move focus to zero: ").strip() == "HOME":
+        focus.home_zero()
+        print("Focus homed.")
     else:
-        print("Tap skipped.")
+        print("Home skipped.")
 
 
 if __name__ == "__main__":
