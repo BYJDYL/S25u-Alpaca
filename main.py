@@ -1,4 +1,4 @@
-from . import adb
+from . import adb, focus
 
 def main() -> None:
     state = adb.run_adb("get-state")
@@ -9,6 +9,15 @@ def main() -> None:
     print(f"Connected; {adb.DEVICE}")
     print("Model:", adb.run_adb("shell", "getprop", "ro.product.model"))
     print("Display:", adb.run_adb("shell", "wm", "size"))
+
+    print("\nOpen Samsung Pro Video manual focus slider.")
+    print("Set focus to 0.50 and verify controls in scrcpy.")
+
+    if input("Type TAP to move focus one step right: ").strip() == "TAP":
+        focus.step_right()
+        print("Focus tap sent.")
+    else:
+        print("Tap skipped.")
 
 
 if __name__ == "__main__":
