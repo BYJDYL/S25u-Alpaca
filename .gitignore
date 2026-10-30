@@ -1,0 +1,23 @@
+# Python-generated files
+__pycache__/
+*.py[cod]
+
+# Virtual environments, if used later
+.venv/
+venv/
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Generated captures and diagnostics
+/captures/
+/output/
+/logs/
+*.log
+*.fits
+*.fit
+*.dng
+*.mp4
+*.ser
