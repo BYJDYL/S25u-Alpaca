@@ -227,6 +227,17 @@ def discovery_loop():
                     address,
                 ) 
 
+def start(controller):
+    """Start the Alpaca focuser without blocking capture console"""
+    httpd = ThreadingHTTPServer(("", HTTP_PORT), AlpacaHandler)
+    AlpacaHandler.device = FocuserDevice(controller)
+    
+    threading.Thread(target=discovery_loop, daemon=True).start()
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+
+    print(f"Alpaca focuser listening on port {HTTP_PORT}")
+    return httpd
+
 def serve(controller):
     AlpacaHandler.device = FocuserDevice(controller)
     threading.Thread(target=discovery_loop, daemon=True).start()
