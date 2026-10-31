@@ -26,7 +26,7 @@ def record_clip(device, duration_s: float) -> None:
         time.sleep(duration_s)
 
     finally:
-        if stop.exists:
+        if stop.wait(timeout=5):
             stop.click()
 
     if not start.wait(timeout=15):
