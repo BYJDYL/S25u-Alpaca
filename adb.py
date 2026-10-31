@@ -26,3 +26,7 @@ def run_adb(*arguments: str, timeout: float = 10.0) -> str:
         raise RuntimeError(f"ADB command failed: {detail or f'exit code {exc.returncode}'}") from exc
 
     return result.stdout.strip()
+
+def tap(x: int, y: int) -> None:
+    """Send a tap event to the device at the specified coordinates."""
+    run_adb("shell", "input", "tap", str(x), str(y))
