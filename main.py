@@ -14,8 +14,24 @@ def main() -> None:
     print("Set focus to 1.00.")
 
     if input("Type HOME to move focus to zero: ").strip() == "HOME":
-        focus.home_zero()
-        print("Focus homed.")
+        controller = focus.FocusController()
+        controller.home_zero()
+
+        if input ("Confirm phone displayes 0.00 type ZERO: ").strip() != "ZERO":
+            return
+
+        while True:
+            value = input("0-200 type blank to quit: ").strip()
+            if not value:
+                break
+
+            try: 
+                controller.move_to(int(value))
+            except ValueError as exc:
+                print("Invalid traget:", exc)
+                continue
+
+            print(f"Commanded focus: {controller.position * 0.005:.3f}") # type: ignore
     else:
         print("Home skipped.")
 
