@@ -1,4 +1,4 @@
-from . import adb, focus
+from . import adb, focus, server
 
 def main() -> None:
     state = adb.run_adb("get-state")
@@ -20,18 +20,7 @@ def main() -> None:
         if input ("Confirm phone displayes 0.00 type ZERO: ").strip() != "ZERO":
             return
 
-        while True:
-            value = input("0-200 type blank to quit: ").strip()
-            if not value:
-                break
-
-            try: 
-                controller.move_to(int(value))
-            except ValueError as exc:
-                print("Invalid traget:", exc)
-                continue
-
-            print(f"Commanded focus: {controller.position * 0.005:.3f}") # type: ignore
+        server.serve(controller)
     else:
         print("Home skipped.")
 
